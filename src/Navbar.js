@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 import { AuthContext } from "./App";
 import LogoNav from "./assets/imgs/lg.jpg";
-
 const Navbar = () => {
   const { user, setUser } = useContext(AuthContext); // Access user and setUser from context
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -39,9 +38,11 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center space-x-2 bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+                className="flex items-center gap-2 bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
-                <span>{user.displayName || user.email}</span>
+                <span className="truncate max-w-[150px]">
+                  {user.displayName || user.email}
+                </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -59,7 +60,7 @@ const Navbar = () => {
                 <div className="absolute right-0 mt-2 w-48 bg-white text-gray-700 rounded-md shadow-lg z-10">
                   <button
                     onClick={handleSignOut}
-                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 focus:outline-none"
                   >
                     ออกจากระบบ
                   </button>
