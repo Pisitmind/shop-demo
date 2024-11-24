@@ -15,12 +15,22 @@ const SignUp = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match");
+      Swal.fire({
+        icon: "error",
+        title: "รหัสผ่านไม่ตรงกัน",
+        text: "โปรดกรอกรหัสผ่านให้ถูกต้อง",
+      });
       return;
     }
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       alert("User created successfully");
+      Swal.fire({
+        icon: "success",
+        title: "สร้างบัญชีสำเร็จ",
+        text: "",
+      });
       navigate("/signin"); // Redirect to Sign In page
     } catch (error) {
       alert(error.message);
