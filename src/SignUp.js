@@ -14,7 +14,6 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
       Swal.fire({
         icon: "error",
         title: "รหัสผ่านไม่ตรงกัน",
@@ -25,7 +24,6 @@ const SignUp = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      alert("User created successfully");
       Swal.fire({
         icon: "success",
         title: "สร้างบัญชีสำเร็จ",
