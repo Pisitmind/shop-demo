@@ -23,15 +23,32 @@ const SignUp = () => {
     }
 
     try {
+      // สร้างบัญชีผู้ใช้ใหม่
       await createUserWithEmailAndPassword(auth, email, password);
+      // หากสร้างบัญชีสำเร็จ
       Swal.fire({
         icon: "success",
         title: "สร้างบัญชีสำเร็จ",
-        text: "",
+        text: "คุณสามารถเข้าสู่ระบบได้ทันที",
       });
+
       navigate("/signin"); // Redirect to Sign In page
     } catch (error) {
-      alert(error.message);
+      // หากเกิดข้อผิดพลาด
+      if (error.code === "auth/email-already-in-use") {
+        Swal.fire({
+          icon: "error",
+          title: "อีเมลนี้ถูกใช้งานแล้ว",
+          text: "โปรดใช้อีเมลอื่นในการลงทะเบียน",
+        });
+      } else {
+        // จัดการข้อผิดพลาดอื่นๆ
+        Swal.fire({
+          icon: "error",
+          title: "เกิดข้อผิดพลาด",
+          text: error.message,
+        });
+      }
     }
   };
 

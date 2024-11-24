@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 import { AuthContext } from "./App";
 import LogoNav from "./assets/imgs/lg.jpg";
+
 const Navbar = () => {
   const { user, setUser } = useContext(AuthContext); // Access user and setUser from context
   const [dropdownOpen, setDropdownOpen] = useState(false);
