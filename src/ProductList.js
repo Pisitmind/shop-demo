@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  addDoc,
+} from "firebase/firestore";
+
 import { db } from "./firebase";
 import Swal from "sweetalert2";
 
@@ -15,12 +22,13 @@ const ProductList = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, "products"));
+      const q = query(collection(db, "products"), orderBy("id", "asc")); // เรียงตาม id
+      const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setProducts(data);
+      setProducts(data); // อัปเดตข้อมูลใน State
     };
     fetchProducts();
   }, []);
